@@ -36,7 +36,20 @@ budget-app/
 └── README.md
 ```
 
-## Setup Instructions
+## Quick Start (Easiest)
+
+### Option 1: Double-Click Launcher (Windows)
+1. Find `start-app.bat` in the project folder
+2. **Double-click** to run
+3. The app will automatically open in your browser
+
+### Option 2: Python Launcher
+```bash
+python launch.py
+```
+This will start both servers and open the app automatically.
+
+## Manual Setup Instructions
 
 ### Backend Setup
 

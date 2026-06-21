@@ -1,29 +1,48 @@
 import pandas as pd
 
-# Category keywords mapping
+# Category keywords mapping - prioritized by specificity
 CATEGORY_KEYWORDS = {
     "Food & Dining": [
-        "restaurant", "cafe", "coffee", "pizza", "burger", "sushi", "food", "doordash",
-        "ubereats", "grubhub", "chipotle", "mcdonalds", "starbucks", "grocery", "whole foods",
-        "trader joe's", "target", "walmart", "safeway", "kroger", "sprouts", "safeway"
+        "doordash", "ubereats", "grubhub", "chipotle", "chick-fil-a", "starbucks",
+        "mcdonald's", "burger king", "taco bell", "wendy's", "popeyes",
+        "harris teeter", "whole foods", "trader joe's", "kroger", "safeway", "sprouts",
+        "restaurant", "cafe", "coffee", "pizza", "burger", "sushi", "diner",
+        "bistro", "grill", "bbq", "noodles", "ramen", "halal", "dessert",
+        "bakery", "smoothie", "juice", "kitchen", "market", "grocery",
+        "papa johns", "dominos", "sonic", "chili's", "olive garden", "crunch", "snooze",
+        "salty donut", "caribou", "dunkin", "arby's", "panera", "subway",
+        "auntie anne's", "cinnabon", "mano bella", "serengeti", "sweet crunch",
+        "cakeable", "sabor", "two scoops", "basil thai", "frozen yogurt", "ice cream"
     ],
     "Gas & Transport": [
-        "gas", "shell", "chevron", "bp", "exxon", "mobil", "parking", "uber", "lyft",
-        "transit", "parking", "toll", "metro", "train", "amtrak", "airline", "airline",
-        "costco gas", "fred meyer", "chevron", "texaco"
+        "exxon", "chevron", "shell", "bp", "mobil", "texaco", "citgo", "sunoco",
+        "gas", "fuel", "petro", "speedway", "circle k", "qt ", "pilot", "love's",
+        "uber", "lyft", "taxi", "parking", "transit", "train", "metro",
+        "amtrak", "airline", "frontier", "lime", "scooter", "bird app",
+        "toll", "metro parking", "parking meter", "valet", "dmv", "carfax"
     ],
     "Phone & Subscriptions": [
-        "verizon", "at&t", "t-mobile", "sprint", "phone", "subscription", "netflix",
-        "hulu", "disney", "spotify", "apple music", "adobe", "microsoft", "slack", "zoom",
-        "github", "aws", "google", "internet", "cable", "iphone"
+        "verizon", "at&t", "t-mobile", "sprint", "metro pcs", "cricket",
+        "netflix", "hulu", "disney", "spotify", "apple music", "youtube",
+        "adobe", "microsoft", "slack", "zoom", "github", "aws",
+        "google", "internet", "cable", "iphone", "apple.com", "playstation",
+        "roblox", "xbox", "gaming", "subscription", "premium", "cleverguard",
+        "booksy", "instant gaming"
     ],
     "Shopping": [
-        "amazon", "ebay", "store", "shop", "retail", "target", "costco", "walmart",
-        "best buy", "home depot", "lowes", "ikea", "mall", "mall", "clothing", "apparel"
+        "amazon", "ebay", "walmart", "target", "costco", "best buy",
+        "home depot", "lowes", "ikea", "five below", "dollar tree", "dollar general",
+        "burlington", "tj maxx", "ross", "marshalls", "wayfair", "overstock",
+        "etsy", "dhgate", "ali", "wish", "shein", "h&m", "forever 21",
+        "clothing", "apparel", "fashion", "shoes", "jeans", "retail",
+        "barnes & noble", "cvs", "walgreens", "rite aid", "health", "pharmacy"
     ],
     "Entertainment/Social": [
-        "movie", "cinema", "theater", "concert", "event", "ticket", "sports", "gym",
-        "fitness", "bar", "club", "karaoke", "entertainment", "theme park", "museum"
+        "movie", "cinema", "theater", "imax", "concert", "event", "ticket",
+        "sports", "stadium", "arena", "gym", "fitness", "dyme boxing",
+        "bar", "club", "lounge", "karaoke", "pool", "bowling", "skating",
+        "kate's skating", "theme park", "carowinds", "museum", "zoo",
+        "queen park", "room 112", "soho bistro", "social", "entertainment"
     ],
 }
 

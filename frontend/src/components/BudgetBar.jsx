@@ -10,25 +10,21 @@ export default function BudgetBar({ transactions }) {
     const categorySpending = {}
 
     transactions.forEach(tx => {
-        if (tx.amount > 0) {
-            categorySpending[tx.category] = (categorySpending[tx.category] || 0) + tx.amount
-        }
-    })
+        if (tx.amount < 0) { // Spending (negative amounts)
+            categorySpending[tx.category] = (categorySpending[tx.category] || 0) + Math.abs(tx.amount)
+            const spent = Math.abs(categorySpending[category] || 0)
+            const remaining = limit - spent
+            const percentage = (spent / limit) * 100
 
-    const budgets = Object.entries(BUDGET_LIMITS).map(([category, limit]) => {
-        const spent = Math.abs(categorySpending[category] || 0)
-        const remaining = limit - spent
-        const percentage = (spent / limit) * 100
-
-        return {
-            category,
-            spent,
-            limit,
-            remaining,
-            percentage: Math.min(percentage, 100),
-            isOverBudget: spent > limit
-        }
-    })
+            return {
+                category,
+                spent,
+                limit,
+                remaining,
+                percentage: Math.min(percentage, 100),
+                isOverBudget: spent > limit
+            }
+        })
 
     return (
         <div className="space-y-6">

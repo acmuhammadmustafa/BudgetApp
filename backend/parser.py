@@ -5,6 +5,7 @@ from io import StringIO, BytesIO
 def parse_bofa_csv(file_content):
     """
     Parse Bank of America CSV export
+    Handles both simple format and format with summary header section.
     Expected columns: Date, Description, Amount (or similar variations)
     """
     try:
@@ -12,8 +13,22 @@ def parse_bofa_csv(file_content):
         if isinstance(file_content, bytes):
             file_content = file_content.decode('utf-8')
 
-        # Read CSV, skipping header rows if needed
-        df = pd.read_csv(StringIO(file_content))
+        # BofA often includes a summary section at the top, so we need to find
+        # where the actual transaction data starts
+        lines = file_content.split('\n')
+
+        # Find the line with "Date" header for actual transactions
+        data_start_idx = 0
+        for i, line in enumerate(lines):
+            if line.strip().startswith('Date') and 'Description' in line:
+                data_start_idx = i
+                break
+
+        # Reconstruct CSV starting from transaction data
+        csv_data = '\n'.join(lines[data_start_idx:])
+
+        # Read CSV
+        df = pd.read_csv(StringIO(csv_data))
 
         # Normalize column names (BofA exports vary)
         df.columns = df.columns.str.strip().str.lower()
@@ -29,13 +44,20 @@ def parse_bofa_csv(file_content):
             'description': 'description',
             'debit': 'amount',
             'credit': 'amount',
-            'amount': 'amount'
+            'amount': 'amount',
+            'running bal.': 'running_bal'  # Ignore running balance column
         }
 
         df = df.rename(columns=col_mapping)
 
+        # Drop unnecessary columns
+        df = df[['date', 'description', 'amount']]
+
         # Convert date to datetime
-        df['date'] = pd.to_datetime(df['date'])
+        df['date'] = pd.to_datetime(df['date'], errors='coerce')
+
+        # Remove rows where date conversion failed
+        df = df.dropna(subset=['date'])
 
         # Clean amount (remove $, convert to float, make negative for debits)
         df['amount'] = df['amount'].astype(
