@@ -1,4 +1,4 @@
-# 💰 Budget App - Full Stack
+#  Budget App
 
 A full-stack budgeting application that parses Bank of America CSV exports, categorizes transactions, and provides real-time spending insights.
 
